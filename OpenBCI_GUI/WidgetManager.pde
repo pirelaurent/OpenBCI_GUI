@@ -38,21 +38,21 @@ void setupWidgets(PApplet _this, ArrayList<Widget> w){
     //Widget_1
     w_fft = new W_fft(_this);
     w_fft.setTitle("FFT Plot");
-    addWidget(w_fft, w);
+   // addWidget(w_fft, w);
     // println("  setupWidgets fft -- " + millis());
 
     if (currentBoard instanceof AccelerometerCapableBoard) {
         //Widget_2
         w_accelerometer = new W_Accelerometer(_this);
         w_accelerometer.setTitle("Accelerometer");
-        addWidget(w_accelerometer, w);
+        //addWidget(w_accelerometer, w);
     }
 
     if(currentBoard instanceof DataSourcePlayback){
         //Playback Widget_3
         w_playback = new W_playback(_this);
         w_playback.setTitle("Playback History");
-        addWidget(w_playback, w);
+        //addWidget(w_playback, w);
     }
 
     //only instantiate this widget if you are using a Ganglion board for live streaming
@@ -60,13 +60,13 @@ void setupWidgets(PApplet _this, ArrayList<Widget> w){
         //If using Ganglion, this is Widget_3
         w_ganglionImpedance = new W_GanglionImpedance(_this);
         w_ganglionImpedance.setTitle("Ganglion Signal");
-        addWidget(w_ganglionImpedance, w);
+        //addWidget(w_ganglionImpedance, w);
     }
 
     //Cyton/Synthetic Widget_3, Ganglion/Playback Widget_4
     w_networking = new W_Networking(_this);
     w_networking.setTitle("Networking");
-    addWidget(w_networking, w);
+    //addWidget(w_networking, w);
 
     //Cyton/Synthetic Widget_4, Ganglion/Playback Widget_5
     w_bandPower = new W_BandPower(_this);
@@ -77,26 +77,26 @@ void setupWidgets(PApplet _this, ArrayList<Widget> w){
     //Cyton/Synthetic Widget_5, Ganglion/Playback Widget_6
     w_headPlot = new W_HeadPlot(_this);
     w_headPlot.setTitle("Head Plot");
-    addWidget(w_headPlot, w);
+    //addWidget(w_headPlot, w);
     // println("  setupWidgets head plot -- " + millis());
 
     //Cyton/Synthetic Widget_6, Ganglion/Playback Widget_7
     w_emg = new W_emg(_this);
     w_emg.setTitle("EMG");
-    addWidget(w_emg, w);
+    //addWidget(w_emg, w);
     // println("  setupWidgets emg -- " + millis());
 
     //Cyton/Synthetic Widget_7, Ganglion/Playback Widget_8
     w_spectrogram = new W_Spectrogram(_this);
     w_spectrogram.setTitle("Spectrogram");
-    addWidget(w_spectrogram, w);
+    //addWidget(w_spectrogram, w);
 
     //only instantiate these widgets if you are using a Cyton board for live streaming
     if(currentBoard instanceof AnalogCapableBoard){
         //Cyton Widget_8
         w_pulsesensor = new W_PulseSensor(_this);
         w_pulsesensor.setTitle("Pulse Sensor");
-        addWidget(w_pulsesensor, w);
+        //addWidget(w_pulsesensor, w);
         // println("  setupWidgets pulse sensor -- " + millis());
     }
 
@@ -104,27 +104,27 @@ void setupWidgets(PApplet _this, ArrayList<Widget> w){
         //Cyton Widget_9
         w_digitalRead = new W_DigitalRead(_this);
         w_digitalRead.setTitle("Digital Read");
-        addWidget(w_digitalRead, w);
+        //addWidget(w_digitalRead, w);
     }
     
     if(currentBoard instanceof AnalogCapableBoard) {
         //Cyton Widget_10
         w_analogRead = new W_AnalogRead(_this);
         w_analogRead.setTitle("Analog Read");
-        addWidget(w_analogRead, w);
+        //addWidget(w_analogRead, w);
     }
 
     if (currentBoard instanceof Board) {
         w_packetLoss = new W_PacketLoss(_this);
         w_packetLoss.setTitle("Packet Loss");
-        addWidget(w_packetLoss, w);
+        //addWidget(w_packetLoss, w);
     }
     
     //Cyton Widget_11, Synthetic Widget_8, Ganglion/Playback Widget_9
     //DEVELOPERS: Here is an example widget with the essentials/structure in place
     w_template1 = new W_template(_this);
     w_template1.setTitle("Widget Template 1");
-    addWidget(w_template1, w);
+    //addWidget(w_template1, w);
 
     /*
     //Cyton Widget_12, Synthetic Widget_9, Ganglion/Playback Widget_10

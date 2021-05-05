@@ -68,7 +68,7 @@ import http.requests.*;
 String appName = "Mentalium"; // to replace text appName+""
 String localGUIVersionString = "v5.0.4";
 //String localGUIVersionDate = "March 2021";
-String localGUIVersionDate = " /pep-inno - 05/05/21";
+String localGUIVersionDate = "-00-pla";
 String guiLatestVersionGithubAPI = "https://api.github.com/repos/OpenBCI/OpenBCI_GUI/releases/latest";
 String guiLatestReleaseLocation = "https://github.com/OpenBCI/OpenBCI_GUI/releases/latest";
 
@@ -228,23 +228,47 @@ PFont p6; //small Open Sans
 
 boolean setupComplete = false;
 
+// special colors Mentalium 
+final color RED_MENTALIUM = #912323;
+final color RED_MENTALIUM_DARKER = #BA2D2D;
+final color DEEP_DARK_RED = #370617;
+final color BLUE_MENTALIUM = #16609f;
+final color DEEP_BLUE_MENTALIUM = #4063bf;
+final color PALE_BLUE_MENTALIUM = #30C5C5; 
+final color PALE_BLUE_COMPLEMENTARY = #C5C530;
+
+final color LIGHT_BLUE_MENTALIUM = #04FBD6;
+final color GREY_MENTALIUM = color(175);
+final color DEEP_GREY_MENTALIUM = color(120);
+final color GREEN_MENTALIUM = #A4FB04;
+final color LIGHT_BROWN = #FAA307; 
+final color ORANGE_BROWN = #E85D04;
+final color TURN_OFF_MENTALIUM = #FB0429;
+final color NOOB_MENTALIUME = #95B303;
+
+// added globals 
+final color SELECTED_ITEM_BG = PALE_BLUE_MENTALIUM;
+final color SELECTED_ITEM_BORDER = 20;
+final color HOVER_ITEM = #7f868f; // some grey
+final color BACKGROUND_LIST = BLUE_MENTALIUM; 
+
 //Starting to collect the GUI-wide color pallet here. Rename constants all caps later...
-final color OPENBCI_DARKBLUE = color(1, 18, 41);
-final color OPENBCI_BLUE = color(31, 69, 110);
+final color OPENBCI_DARKBLUE = DEEP_DARK_RED;// color(1, 18, 41);
+final color OPENBCI_BLUE = RED_MENTALIUM;// color(31, 69, 110);
 final color boxColor = color(200);
 final color boxStrokeColor = OPENBCI_DARKBLUE;
-final color isSelected_color = color(184, 220, 105);
-final color colorNotPressed = color(255);
-final color buttonsLightBlue = color(57,128,204);
-final color TURN_ON_GREEN = color(184,220,105);
+final color isSelected_color = LIGHT_BLUE_MENTALIUM;//color(184, 220, 105);
+final color colorNotPressed =  PALE_BLUE_COMPLEMENTARY; //color(255);
+final color buttonsLightBlue = RED_MENTALIUM_DARKER;//color(57,128,204);
+final color TURN_ON_GREEN = BLUE_MENTALIUM; //color(184,220,105);
 final color WHITE = color(255);
 final color BLACK = color(0);
-final color TURN_OFF_RED = color(224, 56, 45);
-final color BUTTON_HOVER = color(177, 184, 193);//color(252, 221, 198);
-final color BUTTON_PRESSED = color(150, 170, 200); //OPENBCI_DARKBLUE;
+final color TURN_OFF_RED = TURN_OFF_MENTALIUM;//color(224, 56, 45);
+final color BUTTON_HOVER = LIGHT_BROWN;//color(177, 184, 193);//color(252, 221, 198);
+final color BUTTON_PRESSED = ORANGE_BROWN; //color(150, 170, 200); //OPENBCI_DARKBLUE;
 final color BUTTON_LOCKED_GREY = color(128);
 final color BUTTON_PRESSED_DARKGREY = color(50);
-final color BUTTON_NOOBGREEN = color(114,204,171);
+final color BUTTON_NOOBGREEN = NOOB_MENTALIUME;//color(114,204,171);
 final color BUTTON_EXPERTPURPLE = color(135,95,154);
 final color BUTTON_CAUTIONRED = color(214,100,100);
 final color OBJECT_BORDER_GREY = color(150);

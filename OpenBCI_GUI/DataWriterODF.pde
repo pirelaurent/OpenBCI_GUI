@@ -11,9 +11,9 @@ public class DataWriterODF {
     //variation on constructor to have custom name
     DataWriterODF(String _sessionName, String _fileName) {
         streamingBoard = (Board)currentBoard;
-        settings.setSessionPath(directoryManager.getRecordingsPath() + "OpenBCISession_" + _sessionName + File.separator);
+        settings.setSessionPath(directoryManager.getRecordingsPath() + appName+"Session_" + _sessionName + File.separator);
         fname = settings.getSessionPath();
-        fname += "OpenBCI-RAW-";
+        fname += appName+"-RAW-";//fname += "OpenBCI-RAW-";
         fname += _fileName;
         fname += ".txt";
         output = createWriter(fname);        //open the file

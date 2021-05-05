@@ -335,14 +335,19 @@ class DataSourceBox {
         // sourceList.itemHeight = 28;
         // sourceList.padding = 9;
         if (galeaEnabled) {
-            sourceList.addItem("GALEA (live)", DATASOURCE_GALEA);
+           // sourceList.addItem("GALEA (live)", DATASOURCE_GALEA);
         }
-        sourceList.addItem("CYTON (live)", DATASOURCE_CYTON);
-        sourceList.addItem("GANGLION (live)", DATASOURCE_GANGLION);
+        sourceList.addItem("MENTALIUM (live)", DATASOURCE_CYTON); //sourceList.addItem("CYTON (live)", DATASOURCE_CYTON);
+        //sourceList.addItem("GANGLION (live)", DATASOURCE_GANGLION);
         sourceList.addItem("PLAYBACK (from file)", DATASOURCE_PLAYBACKFILE);
-        sourceList.addItem("SYNTHETIC (algorithmic)", DATASOURCE_SYNTHETIC);
+        //sourceList.addItem("SYNTHETIC (algorithmic)", DATASOURCE_SYNTHETIC);
         sourceList.addItem("STREAMING (from external)", DATASOURCE_STREAMING);
         sourceList.scrollerLength = 10;
+    // add empty entry as pb with scroller that flicker 
+        sourceList.addItem("", 9999);
+        sourceList.addItem("", 9999);   
+
+
         sourceList.addCallback(new CallbackListener() {
             public void controlEvent(CallbackEvent theEvent) {
                 if (theEvent.getAction() == ControlP5.ACTION_BROADCAST) {
@@ -1171,7 +1176,8 @@ class SessionDataBox {
 
         //button to autogenerate file name based on time/date
         createAutoSessionNameButton("autoSessionName", "GENERATE SESSION NAME", x + padding, y + 66, w-(padding*2), 24);
-        createODFButton("odfButton", "OpenBCI", dataLogger.getDataLoggerOutputFormat(), x + padding, y + padding*2 + 18 + 58, (w-padding*3)/2, 24);
+        //createODFButton("odfButton", "OpenBCI", dataLogger.getDataLoggerOutputFormat(), x + padding, y + padding*2 + 18 + 58, (w-padding*3)/2, 24);
+        createODFButton("odfButton", "CSV(ODF)", dataLogger.getDataLoggerOutputFormat(), x + padding, y + padding*2 + 18 + 58, (w-padding*3)/2, 24);
         createBDFButton("bdfButton", "BDF+", dataLogger.getDataLoggerOutputFormat(), x + padding*2 + (w-padding*3)/2, y + padding*2 + 18 + 58, (w-padding*3)/2, 24);
 
         createMaxDurationDropdown("maxFileDuration", Arrays.asList(settings.fileDurations));
@@ -1269,7 +1275,7 @@ class SessionDataBox {
             .setOpen(false)
             .setColor(settings.dropdownColors)
             .setBackgroundColor(150)
-            //.setColorBackground(color(31,69,110)) // text field bg color
+            //.setColorBackground(BACKGROUND_LIST) // text field bg color
             //.setColorValueLabel(color(0))       // text color
             //.setColorCaptionLabel(color(255))
             //.setColorForeground(color(125))    // border color when not selected
@@ -1915,7 +1921,7 @@ class RecentPlaybackBox {
     void createRecentPlaybackFilesDropdown(String name, List<String> _items){
         recentPlaybackSL = new CustomScrollableList(rpb_cp5, name)
             .setOpen(false)
-            .setColorBackground(color(31,69,110)) // text field bg color
+            .setColorBackground(BACKGROUND_LIST) // text field bg color
             .setColorValueLabel(color(255))       // text color
             .setColorCaptionLabel(color(255))
             .setColorForeground(color(125))    // border color when not selected
@@ -2060,7 +2066,7 @@ class GaleaBox {
     private ScrollableList createDropdown(String name, GaleaSettingsEnum[] enumValues){
         ScrollableList list = new CustomScrollableList(localCP5, name)
             .setOpen(false)
-            .setColorBackground(color(31,69,110)) // text field bg color
+            .setColorBackground(BACKGROUND_LIST) // text field bg color
             .setColorValueLabel(color(255))       // text color
             .setColorCaptionLabel(color(255))
             .setColorForeground(color(125))    // border color when not selected
@@ -2240,7 +2246,7 @@ class StreamingBoardBox {
     private ScrollableList createDropdown(String name, BrainFlowStreaming_Boards[] enumValues){
         ScrollableList list = new CustomScrollableList(localCP5, name)
             .setOpen(false)
-            .setColorBackground(color(31,69,110)) // text field bg color
+            .setColorBackground(BACKGROUND_LIST) // text field bg color
             .setColorValueLabel(color(255))       // text color
             .setColorCaptionLabel(color(255))
             .setColorForeground(color(125))    // border color when not selected

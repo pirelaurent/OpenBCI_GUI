@@ -213,12 +213,12 @@ public class MenuList extends controlP5.Controller {
             Map m = items.get(i);
             menu.fill(255, 100);
             if (i == hoverItem) {
-                menu.fill(127, 134, 143);
+                menu.fill(HOVER_ITEM);//menu.fill(127, 134, 143);
             }
             if (i == activeItem) {
-                menu.stroke(184, 220, 105, 255);
+                menu.stroke(SELECTED_ITEM_BORDER);//menu.stroke(184, 220, 105, 255);
                 menu.strokeWeight(1);
-                menu.fill(184, 220, 105, 255);
+                menu.fill(SELECTED_ITEM_BG);//menu.fill(184, 220, 105, 255);
                 menu.rect(0, 0, getWidth()-1, itemHeight-1 );
                 menu.noStroke();
             } else {
