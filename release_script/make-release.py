@@ -38,7 +38,7 @@ flavors = {
 data_dir_names = {
     WINDOWS : "data",
     LINUX : "data",
-    MAC : os.path.join("OpenBCI_GUI.app", "Contents", "Java", "data")
+    MAC : os.path.join(appName+".app", "Contents", "Java", "data")
 }
 
 def get_timestamp_ci():
@@ -88,7 +88,7 @@ def make_timestamp_pretty(timestamp):
 ### Function: Apply timestamp in code
 ###########################################################
 def apply_timestamp(sketch_dir, timestamp):
-    main_file_dir = os.path.join(sketch_dir, "OpenBCI_GUI.pde")
+    main_file_dir = os.path.join(sketch_dir, appName+".pde")
 
     pretty_timestamp = make_timestamp_pretty(timestamp)
 
@@ -108,7 +108,7 @@ def apply_timestamp(sketch_dir, timestamp):
 ### Function: Rename flavor with GUI version
 ###########################################################
 def get_release_dir_name(sketch_dir, flavor, timestamp):
-    main_file_dir = os.path.join(sketch_dir, "OpenBCI_GUI.pde")
+    main_file_dir = os.path.join(sketch_dir, appName+".pde")
     version_str = "VERSION.NOT.FOUND"
     with open(main_file_dir, 'r') as sketch_file:
         for line in sketch_file:
@@ -132,10 +132,10 @@ def get_release_dir_name(sketch_dir, flavor, timestamp):
 def find_sketch_dir():
     # processing-java requires the cwd to build a release
     cwd = os.getcwd()
-    sketch_dir = os.path.join(cwd, "OpenBCI_GUI")
+    sketch_dir = os.path.join(cwd, appName+"")
 
     # check that we are in the right directory to build
-    main_file_dir = os.path.join(sketch_dir, "OpenBCI_GUI.pde")
+    main_file_dir = os.path.join(sketch_dir, appName+".pde")
     if not os.path.isfile(main_file_dir):
         sys.exit("ERROR: Could not find sketch file: " + main_file_dir)
 
@@ -223,7 +223,7 @@ def package_app(sketch_dir, flavor, timestamp, windows_signing=False, windows_pf
     ### On mac, copy the icon file and sign the app
     ###########################################################
     if LOCAL_OS == MAC:
-        app_dir = os.path.join(build_dir, "OpenBCI_GUI.app")
+        app_dir = os.path.join(build_dir, appName+".app")
         icon_dir = os.path.join(sketch_dir, "sketch.icns")
         icon_dest = os.path.join(app_dir, "Contents", "Resources", "sketch.icns")
         try:
@@ -244,7 +244,7 @@ def package_app(sketch_dir, flavor, timestamp, windows_signing=False, windows_pf
             print ("Successfully signed app.")
 
     if LOCAL_OS == WINDOWS:
-        exe_dir = os.path.join(build_dir, "OpenBCI_GUI.exe")
+        exe_dir = os.path.join(build_dir, appName+".exe")
         assert(os.path.isfile(exe_dir))
 
         # On Windows, set the application manifest
@@ -282,11 +282,11 @@ def package_app(sketch_dir, flavor, timestamp, windows_signing=False, windows_pf
     ### On Mac, make a .dmg and sign it
     ###########################################################
     if LOCAL_OS == MAC:
-        app_dir = os.path.join(build_dir, "OpenBCI_GUI.app")
+        app_dir = os.path.join(build_dir, appName+".app")
         dmg_dir = build_dir + ".dmg"
         try:
             subprocess.check_call(["dmgbuild", "-s", "release_script/mac_only/dmgbuild_settings.py", "-D",\
-                "app=" + app_dir, "OpenBCI_GUI", dmg_dir])
+                "app=" + app_dir, appName+"", dmg_dir])
         except subprocess.CalledProcessError as err:
             print (err)
             print ("WARNING: Failed create the .dmg file.")
@@ -308,7 +308,7 @@ def package_app(sketch_dir, flavor, timestamp, windows_signing=False, windows_pf
     else:
         print ("Zipping ...")
         # fix the directory structure: application.windows64/OpenBCI_GUI/OpenBCI_GUI.exe
-        temp_dir = os.path.join(sketch_dir, "OpenBCI_GUI")
+        temp_dir = os.path.join(sketch_dir, appName+"")
         os.rename(build_dir, temp_dir)
         os.mkdir(build_dir)
         shutil.move(temp_dir, build_dir)

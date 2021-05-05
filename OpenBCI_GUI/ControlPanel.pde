@@ -583,7 +583,7 @@ class ComPortBox {
     }
 
     private LinkedList<String> getCytonComPorts() {
-        final String[] names = {"FT231X USB UART", "VCP"};
+        final String[] names = {"FT231X USB UART", "VCP","CP2102"};
         final SerialPort[] comPorts = SerialPort.getCommPorts();
         LinkedList<String> results = new LinkedList<String>();
         for (SerialPort comPort : comPorts) {
@@ -1876,7 +1876,7 @@ class RecentPlaybackBox {
 
         File f = new File(userPlaybackHistoryFile);
         if (!f.exists()) {
-            println("OpenBCI_GUI::Control Panel: Playback history file not found.");
+            println(appName+"::Control Panel: Playback history file not found.");
             recentPlaybackFilesHaveUpdated = true;
             playbackHistoryFileExists = false;
             return;
@@ -1905,7 +1905,7 @@ class RecentPlaybackBox {
 
             playbackHistoryFileExists = true;
         } catch (Exception e) {
-            println("OpenBCI_GUI::Control Panel: Other error! Please submit an issue on Github and share this console log.");
+            println(appName+"::Control Panel: Other error! Please submit an issue on Github and share this console log.");
             println(e.getMessage());
             playbackHistoryFileExists = false;
         }

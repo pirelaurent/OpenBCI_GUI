@@ -65,8 +65,10 @@ import http.requests.*;
 //                       Global Variables & Instances
 //------------------------------------------------------------------------
 //Used to check GUI version in TopNav.pde and displayed on the splash screen on startup
+String appName = "Mentalium"; // to replace text appName+""
 String localGUIVersionString = "v5.0.4";
-String localGUIVersionDate = "March 2021";
+//String localGUIVersionDate = "March 2021";
+String localGUIVersionDate = " /pep-inno - 05/05/21";
 String guiLatestVersionGithubAPI = "https://api.github.com/repos/OpenBCI/OpenBCI_GUI/releases/latest";
 String guiLatestReleaseLocation = "https://github.com/OpenBCI/OpenBCI_GUI/releases/latest";
 
@@ -342,7 +344,8 @@ void setup() {
     p5 = createFont("fonts/OpenSans-Regular.ttf", 12);
     p6 = createFont("fonts/OpenSans-Regular.ttf", 10);
 
-    cog = loadImage("cog_1024x1024.png");
+    //cog = loadImage("cog_1024x1024.png");
+     cog = loadImage("logo-mentalium_nobackground-1000.png");
 
     // check if the current directory is writable
     File dummy = new File(sketchPath());
@@ -410,7 +413,8 @@ void delayedSetup() {
     topNav = new TopNav();
 
     logo_blue = loadImage("logo_blue.png");
-    logo_white = loadImage("logo_white.png");
+    //logo_white = loadImage("logo_white.png");
+    logo_white = loadImage("logo_white_empty.png");
     consoleImgBlue = loadImage("console-45x45-dots_blue.png");
     consoleImgWhite = loadImage("console-45x45-dots_white.png");
     loadingGIF = new Gif(this, "ajax_loader_gray_512.gif");
@@ -430,7 +434,7 @@ void delayedSetup() {
         controlPanel = new ControlPanel(this);
 
         setupComplete = true; // signal that the setup thread has finished
-        println("OpenBCI_GUI::Setup: Setup is complete!");
+        println(appName+"::Setup: Setup is complete!");
     }
 }
 
@@ -486,7 +490,7 @@ void initSystem() {
     println("=================================================");
     println("");
 
-    verbosePrint("OpenBCI_GUI: initSystem: -- Init 0 -- ");
+    verbosePrint(appName+": initSystem: -- Init 0 -- ");
 
     //reset init variables
     systemHasHalted = false;
@@ -518,16 +522,16 @@ void initSystem() {
             break;
         case DATASOURCE_SYNTHETIC:
             currentBoard = new BoardBrainFlowSynthetic(nchan);
-            println("OpenBCI_GUI: Init session using Synthetic data source");
+            println(appName+": Init session using Synthetic data source");
             break;
         case DATASOURCE_PLAYBACKFILE:
             if (!playbackData_fname.equals("N/A")) {
                 currentBoard = new DataSourcePlayback(playbackData_fname);
-                println("OpenBCI_GUI: Init session using Playback data source");
+                println(appName+": Init session using Playback data source");
             } else {
                 if (!sdData_fname.equals("N/A")) {
                     currentBoard = new DataSourceSDCard(sdData_fname);
-                    println("OpenBCI_GUI: Init session using Playback data source");
+                    println(appName+": Init session using Playback data source");
                 }
                 else {
                     // no code path to it
@@ -563,7 +567,7 @@ void initSystem() {
                     controlPanel.streamingBoardBox.getIP(),
                     controlPanel.streamingBoardBox.getPort()
                     );
-            println("OpenBCI_GUI: Init session using Streaming data source");
+            println(appName+": Init session using Streaming data source");
         default:
             break;
     }
@@ -576,20 +580,20 @@ void initSystem() {
 
     dataLogger.initialize();
 
-    verbosePrint("OpenBCI_GUI: initSystem: Initializing core data objects");
+    verbosePrint(appName+": initSystem: Initializing core data objects");
     initCoreDataObjects();
 
-    verbosePrint("OpenBCI_GUI: initSystem: -- Init 1 -- " + millis());
-    verbosePrint("OpenBCI_GUI: initSystem: Initializing FFT data objects");
+    verbosePrint(appName+": initSystem: -- Init 1 -- " + millis());
+    verbosePrint(appName+": initSystem: Initializing FFT data objects");
     initFFTObjectsAndBuffer();
 
-    verbosePrint("OpenBCI_GUI: initSystem: -- Init 2 -- " + millis());
-    verbosePrint("OpenBCI_GUI: initSystem: Closing ControlPanel...");
+    verbosePrint(appName+": initSystem: -- Init 2 -- " + millis());
+    verbosePrint(appName+": initSystem: Closing ControlPanel...");
 
     controlPanel.close();
     topNav.controlPanelCollapser.setOff();
 
-    verbosePrint("OpenBCI_GUI: initSystem: -- Init 3 -- " + millis());
+    verbosePrint(appName+": initSystem: -- Init 3 -- " + millis());
 
     if (abandonInit) {
         haltSystem();
@@ -604,7 +608,7 @@ void initSystem() {
         systemMode = SYSTEMMODE_POSTINIT; //tell system it's ok to leave control panel and start interfacing GUI
     }
 
-    verbosePrint("OpenBCI_GUI: initSystem: -- Init 4 -- " + millis());
+    verbosePrint(appName+": initSystem: -- Init 4 -- " + millis());
 
      //don't save default session settings for Galea or StreamingBoard
     if (eegDataSource != DATASOURCE_GALEA && eegDataSource != DATASOURCE_STREAMING) {
@@ -727,7 +731,7 @@ void stopRunning() {
 //halt the data collection
 void haltSystem() {
     if (!systemHasHalted) { //prevents system from halting more than once\
-        println("openBCI_GUI: haltSystem: Halting system for reconfiguration of settings...");
+        println(appName+": haltSystem: Halting system for reconfiguration of settings...");
         
         //Reset the text for the Start Session buttonscreen. Skip when reiniting board while already in playback mode session.
         if (!reinitRequested) {
@@ -736,7 +740,7 @@ void haltSystem() {
 
         if (w_networking != null && w_networking.getNetworkActive()) {
             w_networking.stopNetwork();
-            println("openBCI_GUI: haltSystem: Network streams stopped");
+            println(appName+": haltSystem: Network streams stopped");
         }
         
         stopRunning();  //stop data transfer
@@ -860,7 +864,8 @@ void systemDraw() { //for drawing to the screen
     }
 
     //Display GUI version and FPS in the title bar of the app
-    surface.setTitle("OpenBCI GUI " + localGUIVersionString + " - " + localGUIVersionDate + " - " + int(frameRate) + " fps");
+    //surface.setTitle("OpenBCI GUI " + localGUIVersionString + " - " + localGUIVersionDate + " - " + int(frameRate) + " fps");
+    surface.setTitle(appName+" "+ localGUIVersionString + " - " + localGUIVersionDate + " - " + int(frameRate) + " fps");
 }
 
 void requestReinit() {
@@ -870,7 +875,7 @@ void requestReinit() {
 //Always Called after systemDraw()
 void systemInitSession() {
     if (midInitCheck2) {
-        println("OpenBCI_GUI: Start session. Calling initSystem().");
+        println(appName+": Start session. Calling initSystem().");
         try {
             initSystem(); //found in OpenBCI_GUI.pde
         } catch (Exception e) {

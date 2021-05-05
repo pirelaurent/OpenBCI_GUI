@@ -1,6 +1,6 @@
 class DirectoryManager {
 
-    private final String guiDataPath = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenBCI_GUI"+File.separator;
+    private final String guiDataPath = System.getProperty("user.home")+File.separator+"Documents"+File.separator+appName+""+File.separator;
     private final String recordingsPath = guiDataPath+"Recordings"+File.separator;
     private final String settingsPath = guiDataPath+"Settings"+File.separator;
     private final String consoleDataPath = guiDataPath+"Console_Data"+File.separator;
@@ -34,7 +34,7 @@ class DirectoryManager {
         // Create GUI data folder in Users' Documents and copy sample data if it doesn't already exist
         String directoryName = guiDataPath + File.separator + "Sample_Data" + File.separator;
         String guiv4fileName = directoryName + "OpenBCI-sampleData-2-meditation.txt";
-        String guiv5fileName = directoryName + "OpenBCI_GUI-v5-meditation.txt";
+        String guiv5fileName = directoryName + appName+"-v5-meditation.txt";
         File directory = new File(directoryName);
         File guiv4_fileToCheck = new File(guiv4fileName);
         File guiv5_fileToCheck = new File(guiv5fileName);
@@ -45,23 +45,23 @@ class DirectoryManager {
                 for (File subFile : directory.listFiles()) {
                     subFile.delete();
                 }
-                println("OpenBCI_GUI::Setup: Successfully deleted old GUI v4 sample data files!");
+                println(appName+"::Setup: Successfully deleted old GUI v4 sample data files!");
             } catch (SecurityException e) {
-                println("OpenBCI_GUI::Setup: Error trying to delete old GUI Sample Data in Documents folder.");
+                println(appName+"::Setup: Error trying to delete old GUI Sample Data in Documents folder.");
             }
         }
         
         if (!guiv5_fileToCheck.exists()) {
             copySampleDataFiles(directory, directoryName);
         } else {
-            println("OpenBCI_GUI::Setup: GUI v5 Sample Data exists in Documents folder.");
+            println(appName+"::Setup: GUI v5 Sample Data exists in Documents folder.");
         }
 
         makeRecordingsFolder();
     }
 
     private void copySampleDataFiles(File directory, String directoryName) {
-        println("OpenBCI_GUI::Setup: Copying sample data to Documents/OpenBCI_GUI/Sample_Data");
+        println(appName+"::Setup: Copying sample data to Documents/OpenBCI_GUI/Sample_Data");
         // Make the entire directory path including parents
         directory.mkdirs();
         try {
@@ -75,7 +75,7 @@ class DirectoryManager {
                 }
             }
         } catch (IOException e) {
-            println("OpenBCI_GUI::Setup: Error trying to copy Sample Data to Documents directory.");
+            println(appName+"::Setup: Error trying to copy Sample Data to Documents directory.");
         }
     }
 
@@ -84,7 +84,7 @@ class DirectoryManager {
         String recordingDirString = guiDataPath + File.separator + "Recordings";
         File recDirectory = new File(recordingDirString);
         if (recDirectory.mkdir()) {
-            println("OpenBCI_GUI::Setup: Created \\Documents\\OpenBCI_GUI\\Recordings\\");
+            println(appName+"::Setup: Created \\Documents\\OpenBCI_GUI\\Recordings\\");
         }
     }
     

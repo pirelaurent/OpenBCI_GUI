@@ -21,7 +21,7 @@ synchronized void keyPressed() {
 
     //note that the Processing variable "key" is the keypress as an ASCII character
     //note that the Processing variable "keyCode" is the keypress as a JAVA keycode.  This differs from ASCII
-    //println("OpenBCI_GUI: keyPressed: key = " + key + ", int(key) = " + int(key) + ", keyCode = " + keyCode);
+    //println(appName+": keyPressed: key = " + key + ", int(key) = " + int(key) + ", keyCode = " + keyCode);
 
     //Check for Copy/Paste text keyboard shortcuts before anything else.
     if (copyPaste.checkIfPressedAllOS()) {
@@ -128,7 +128,7 @@ void parseKey(char val) {
 
         case 'm':
             String picfname = "OpenBCI-" + directoryManager.getFileNameDateTime() + ".jpg";
-            //println("OpenBCI_GUI: 'm' was pressed...taking screenshot:" + picfname);
+            //println(appName+": 'm' was pressed...taking screenshot:" + picfname);
             saveFrame(directoryManager.getGuiDataPath() + "Screenshots" + System.getProperty("file.separator") + picfname);    // take a shot of that!
             output("Screenshot captured! Saved to /Documents/OpenBCI_GUI/Screenshots/" + picfname);
             return;
@@ -257,7 +257,7 @@ synchronized void mousePressed() {
     if (!setupComplete) {
         return;
     }
-    // verbosePrint("OpenBCI_GUI: mousePressed: mouse pressed");
+    // verbosePrint(appName+": mousePressed: mouse pressed");
     // println("systemMode" + systemMode);
 
     //if not before "START SESSION" ... i.e. after initial setup
@@ -280,11 +280,11 @@ synchronized void mousePressed() {
         //close control panel if you click outside...
         if (systemMode == SYSTEMMODE_POSTINIT) {
             if (mouseX > 0 && mouseX < controlPanel.w && mouseY > 0 && mouseY < controlPanel.initBox.y+controlPanel.initBox.h) {
-                println("OpenBCI_GUI: mousePressed: clicked in CP box");
+                println(appName+": mousePressed: clicked in CP box");
             }
             //if clicked out of panel
             else {
-                println("OpenBCI_GUI: mousePressed: outside of CP clicked");
+                println(appName+": mousePressed: outside of CP clicked");
                 controlPanel.isOpen = false;
                 topNav.controlPanelCollapser.setOff();
             }
@@ -395,7 +395,7 @@ class CopyPaste {
         }
 
         if (tf.isFocus()) {
-            StringBuilder status = new StringBuilder("OpenBCI_GUI: User pasted text from the clipboard into ");
+            StringBuilder status = new StringBuilder(appName+": User pasted text from the clipboard into ");
             status.append(tf.toString());
             println(status);
             StringBuilder sb = new StringBuilder();
@@ -423,7 +423,7 @@ class CopyPaste {
             if (s.length() == 0) {
                 return;
             }
-            StringBuilder status = new StringBuilder("OpenBCI_GUI: User copied text from ");
+            StringBuilder status = new StringBuilder(appName+": User copied text from ");
             status.append(tf.toString());
             status.append(" to the clipboard");
             println(status);

@@ -122,7 +122,7 @@ class SessionSettings {
 
     //Used to set text for Notch and BP filter settings
     String [] dataProcessingNotchArray = {"60Hz", "50Hz", "None"};
-    String [] dataProcessingBPArray = {"1-50 Hz", "7-13 Hz", "15-50 Hz", "5-50 Hz", "No Filter"};
+    // not used, confusing String [] dataProcessingBPArray = {"1-50 Hz", "7-13 Hz", "15-50 Hz", "5-50 Hz", "No Filter"};
 
     //Used to print the status of each channel in the console when loading settings
     String[] channelsActiveArray = {"Active", "Not Active"};

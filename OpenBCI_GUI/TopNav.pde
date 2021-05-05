@@ -66,11 +66,12 @@ class TopNav {
 
         //TOP RIGHT OF GUI, FROM LEFT<---Right
         createDebugButton(" ", width - DEBUG_BUT_W - PAD_3, PAD_3, DEBUG_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
-        createTutorialsButton("Help", (int)debugButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3, TOPRIGHT_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
+    
+/*      createTutorialsButton("Help", (int)debugButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3, TOPRIGHT_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
         createIssuesButton("Issues", (int)tutorialsButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3, TOPRIGHT_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
         createShopButton("Shop", (int)issuesButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3, TOPRIGHT_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
         createUpdateGuiButton("Update", (int)shopButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3, TOPRIGHT_BUT_W, TOPNAV_BUT_H, h3, 16, TOPNAV_DARKBLUE, WHITE);
-
+ */
         //SUBNAV TOP RIGHT
         createTopNavSettingsButton("Settings", width - SUBNAV_BUT_W - PAD_3, SUBNAV_BUT_Y, SUBNAV_BUT_W, SUBNAV_BUT_H, h4, 14, SUBNAV_LIGHTBLUE, WHITE);
 
@@ -203,7 +204,7 @@ class TopNav {
         }
 
         if (previousSystemMode != systemMode) {
-            if (systemMode >= SYSTEMMODE_POSTINIT) {
+ /*            if (systemMode >= SYSTEMMODE_POSTINIT) {
                 layoutSelector.update();
                 tutorialSelector.update();
                 if (int(settingsButton.getPosition()[0]) != width - (SUBNAV_BUT_W*2) + 3) {
@@ -215,7 +216,7 @@ class TopNav {
                     settingsButton.setPosition(width - 70 - 3, SUBNAV_BUT_Y);
                     verbosePrint("TopNav: Updated Settings Button Position");
                 }
-            }
+            } */
             configSelector.update();
             previousSystemMode = systemMode;
         }
@@ -288,12 +289,13 @@ class TopNav {
     void screenHasBeenResized(int _x, int _y) {
         topNav_cp5.setGraphics(ourApplet, 0, 0); //Important!
         debugButton.setPosition(width - debugButton.getWidth() - PAD_3, PAD_3);
+/*        
         tutorialsButton.setPosition((int)debugButton.getPosition()[0] - TOPRIGHT_BUT_W - PAD_3, PAD_3);
         issuesButton.setPosition(tutorialsButton.getPosition()[0] - tutorialsButton.getWidth() - PAD_3, PAD_3);
         shopButton.setPosition(issuesButton.getPosition()[0] - issuesButton.getWidth() - PAD_3, PAD_3);
         updateGuiVersionButton.setPosition(shopButton.getPosition()[0] - shopButton.getWidth() - PAD_3, PAD_3);
         settingsButton.setPosition(width - settingsButton.getWidth() - PAD_3, SUBNAV_BUT_Y);
-
+*/
         if (systemMode == SYSTEMMODE_POSTINIT) {
             toggleDataStreamingButton.setPosition(PAD_3, SUBNAV_BUT_Y);
             filtNotchButton.setPosition(PAD_3*2 + toggleDataStreamingButton.getWidth(), SUBNAV_BUT_Y);
@@ -567,14 +569,14 @@ class TopNav {
     public void stopButtonWasPressed() {
         //toggle the data transfer state of the ADS1299...stop it or start it...
         if (currentBoard.isStreaming()) {
-            output("openBCI_GUI: stopButton was pressed. Stopping data transfer, wait a few seconds.");
+            output(appName+": stopButton was pressed. Stopping data transfer, wait a few seconds.");
             stopRunning();
             if (!currentBoard.isStreaming()) {
                 toggleDataStreamingButton.getCaptionLabel().setText(stopButton_pressToStart_txt);
                 toggleDataStreamingButton.setColorBackground(isSelected_color);
             }
         } else { //not running
-            output("openBCI_GUI: startButton was pressed. Starting data transfer, wait a few seconds.");
+            output(appName+": startButton was pressed. Starting data transfer, wait a few seconds.");
             startRunning();
             if (currentBoard.isStreaming()) {
                 toggleDataStreamingButton.getCaptionLabel().setText(stopButton_pressToStop_txt);

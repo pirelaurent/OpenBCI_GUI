@@ -60,6 +60,7 @@ class DataLogger {
     }
 
     public void onStartStreaming() {
+        verbosePrint("PLA: onStartStreaming"+outputDataSource+' '+eegDataSource);
         if (outputDataSource > OUTPUT_SOURCE_NONE && eegDataSource != DATASOURCE_PLAYBACKFILE) {
             //open data file if it has not already been opened
             if (!settings.isLogFileOpen()) {
@@ -110,14 +111,14 @@ class DataLogger {
     */
     private void openNewLogFileBDF(String _fileName) {
         if (fileWriterBDF != null) {
-            println("OpenBCI_GUI: closing log file");
+            println(appName+": closing log file");
             closeLogFile();
         }
         //open the new file
         fileWriterBDF = new DataWriterBDF(_fileName);
 
         output_fname = fileWriterBDF.fname;
-        println("OpenBCI_GUI: openNewLogFile: opened BDF output file: " + output_fname); //Print filename of new BDF file to console
+        println(appName+": openNewLogFile: opened BDF output file: " + output_fname); //Print filename of new BDF file to console
     }
 
     /**
@@ -127,14 +128,14 @@ class DataLogger {
     */
     private void openNewLogFileODF(String _fileName) {
         if (fileWriterODF != null) {
-            println("OpenBCI_GUI: closing log file");
+            println(appName+": closing log file");
             closeLogFile();
         }
         //open the new file
         fileWriterODF = new DataWriterODF(sessionName, _fileName);
 
         output_fname = fileWriterODF.fname;
-        println("OpenBCI_GUI: openNewLogFile: opened ODF output file: " + output_fname); //Print filename of new ODF file to console
+        println(appName+": openNewLogFile: opened ODF output file: " + output_fname); //Print filename of new ODF file to console
     }
 
     private void closeLogFile() {

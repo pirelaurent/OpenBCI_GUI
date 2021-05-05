@@ -28,7 +28,7 @@ void tryToloadEarlySettings()  {
 ### in OpenBCI_GUI.PDE add a new call before saving initial settings
  
   ``` java
-  verbosePrint("OpenBCI_GUI: initSystem: -- Init 4 -- " + millis());
+  verbosePrint(appName+": initSystem: -- Init 4 -- " + millis());
  
     //don't save default session settings for Galea or StreamingBoard
     if (eegDataSource != DATASOURCE_GALEA && eegDataSource != DATASOURCE_STREAMING) {

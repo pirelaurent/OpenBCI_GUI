@@ -15,8 +15,8 @@ files_to_unittest = [
 ]
 
 def main ():
-    origin_path = "OpenBCI_GUI"
-    sketch_dir = "OpenBCI_GUI_UnitTests"
+    origin_path = appName+""
+    sketch_dir = appName+"_UnitTests"
 
     # copy any necessary files
     for filename in os.listdir(origin_path):
