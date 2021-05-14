@@ -437,7 +437,7 @@ class SerialBox {
                 controlPanel.comPortBox.attemptAutoConnectCyton();
             }
         });
-        autoConnectButton.setDescription("Attempt to auto-connect to Cyton. Try \"Manual\" if this does not work.");
+        autoConnectButton.setDescription("Attempt to auto-connect to Mentalium. Try \"Manual\" if this does not work.");
     }
 
     private void createRadioConfigButton(String name, String text, int _x, int _y, int _w, int _h) {
@@ -455,7 +455,7 @@ class SerialBox {
                 }
             }
         });
-        popOutRadioConfigButton.setDescription("Having trouble connecting to Cyton? Click here to access Radio Configuration tools.");
+        popOutRadioConfigButton.setDescription("Trouble to connecting to Mentalium? Click here to access Radio Configuration tools.");
     }
 };
 
@@ -533,7 +533,7 @@ class ComPortBox {
                 if (theEvent.getAction() == ControlP5.ACTION_BROADCAST) {
                     Map bob = serialList.getItem(int(serialList.getValue()));
                     openBCI_portName = (String)bob.get("subline");
-                    output("ControlPanel: Selected OpenBCI Port " + openBCI_portName);
+                    output("ControlPanel: Selected Port " + openBCI_portName);
                 }
             }
         });
@@ -548,11 +548,11 @@ class ComPortBox {
             if (cytonRadioCfg.get_channel()) {
                 controlPanel.initBox.initButtonPressed();
             } else {                
-                outputWarn("Found a Cyton dongle, but could not connect to the board. Auto-Scanning now...");
+                outputWarn("Found a Mentalium dongle, but could not connect to the board. Auto-Scanning now...");
                 midAutoScan = true;
             }
         } else {
-            outputWarn("No Cyton dongles were found.");
+            outputWarn("No Mentalium dongles were found.");
         }
     }
 
@@ -560,10 +560,10 @@ class ComPortBox {
     //This is called after overlay has a chance to draw on top to inform users the GUI is working and not crashed
     private void cytonAutoConnect_AutoScan() {
         if (cytonRadioCfg.scan_channels()) {
-            println("Successfully connected to Cyton using " + openBCI_portName);
+            println("Successfully connected to Mentalium using " + openBCI_portName);
             controlPanel.initBox.initButtonPressed();
         } else {
-            outputError("Unable to connect to Cyton. Please check hardware and power source.");
+            outputError("Unable to connect to Mentalium. Please check hardware and power source.");
         }
     }
 
@@ -577,7 +577,7 @@ class ComPortBox {
 
                 LinkedList<String> comPorts = getCytonComPorts();
                 for (String comPort : comPorts) {
-                    serialList.addItem("(Cyton) " + comPort, comPort, "");
+                    serialList.addItem("(Mentalium) " + comPort, comPort, "");
                 }
                 serialList.updateMenu();
                 refreshCytonDongles.getCaptionLabel().setText("REFRESH LIST");
@@ -588,7 +588,7 @@ class ComPortBox {
     }
 
     private LinkedList<String> getCytonComPorts() {
-        final String[] names = {"FT231X USB UART", "VCP","CP2102"};
+        final String[] names = {"FT231X USB UART", "VCP","CP210"};
         final SerialPort[] comPorts = SerialPort.getCommPorts();
         LinkedList<String> results = new LinkedList<String>();
         for (SerialPort comPort : comPorts) {
@@ -601,7 +601,8 @@ class ComPortBox {
                     String found = "";
                     if (isMac() || isLinux()) found += "/dev/";
                     found += comPort.getSystemPortName();
-                    println("ControlPanel: Found Cyton Dongle on COM port: " + found);
+                    //println("ControlPanel: Found Cyton Dongle on COM port: " + found);
+                    println("ControlPanel: Found Dongle "+comPort.toString()+" on COM port: " + found);
                     results.add(found);
                 }
             }
@@ -2487,7 +2488,7 @@ class SDBox {
 
 class RadioConfigBox {
     public int x, y, w, h, padding; //size and position
-    private String initial_message = "Having trouble connecting to your Cyton? Try Auto-Scan!\n\nUse this tool to get Cyton status or change settings.";
+    private String initial_message = "Trouble to connect your Mentalium? \nTry Auto-Scan!\n\nUse this tool to get status or change settings.";
     private String last_message = initial_message;
     public boolean isShowing;
     private RadioConfig cytonRadioCfg;
@@ -2594,7 +2595,7 @@ class RadioConfigBox {
                 controlPanel.hideChannelListCP();
             }
         });
-        systemStatusButton.setDescription("Get connection status and the current channel of your Cyton and USB Dongle.");
+        systemStatusButton.setDescription("Get connection status and the current channel of your Mentalium and USB Dongle.");
     }
 
     private void createSetChannelButton(String name, String text, int _x, int _y, int _w, int _h) {
@@ -2605,7 +2606,7 @@ class RadioConfigBox {
                 controlPanel.channelPopup.setTitleChangeChannel();
             }
         });
-        setChannelButton.setDescription("Change the channel of your Cyton and USB Dongle.");
+        setChannelButton.setDescription("Change the channel of your Mentalium and USB Dongle.");
     }
 
     private void createOverrideChannelButton(String name, String text, int _x, int _y, int _w, int _h) {
@@ -2785,7 +2786,7 @@ class InitBox {
             }
         } else {
             //if system is already active ... stop session and flip button state back
-            outputInfo("Learn how to use this application and more at openbci.github.io/Documentation/");
+            //outputInfo("Learn how to use this application and more at openbci.github.io/Documentation/");
             setInitSessionButtonText("START SESSION");
             topNav.setLockTopLeftSubNavCp5Objects(false); //Unlock top left subnav buttons
             //creates new data file name so that you don't accidentally overwrite the old one

@@ -47,7 +47,7 @@ class RadioConfig {
     }
     
     public boolean scan_channels(){
-        verbosePrint("Cyton Auto-Connect Button: scan_channels");
+        verbosePrint("Mentalium Auto-Connect Button: scan_channels");
         if(serial_direct_board == null){
             if(!connect_to_portName()){
                 return false;
@@ -93,7 +93,7 @@ class RadioConfig {
             if(print_bytes(rcConfig)){
                 String[] s = split(rcStringReceived, ':');
                 if (s[0].equals("Success")) {
-                    outputSuccess("Successfully connected to Cyton using " + openBCI_portName);
+                    outputSuccess("Successfully connected to Mentalium Cyton using " + openBCI_portName);
                 } else {
                     outputError("Failed to connect using " + openBCI_portName + ". Check hardware or try pressing 'Auto-Scan'.");
                 }
@@ -106,7 +106,7 @@ class RadioConfig {
     }
 
     public boolean system_status(){
-        verbosePrint("Cyton Auto-Connect Button: system_status");
+        verbosePrint("Mentalium Auto-Connect Button: system_status");
         rcStringReceived = "";
         serial_direct_board = null;
         if(!connect_to_portName()){
@@ -124,10 +124,10 @@ class RadioConfig {
                 String[] s = split(rcStringReceived, ':');
                 closeSerialPort();
                 if (s[0].equals("Success")) {
-                    verbosePrint("Cyton Auto-Connect Button: Successfully connected to Cyton using " + openBCI_portName);
+                    verbosePrint("Mentalium Auto-Connect Button: Successfully connected to Mentalium using " + openBCI_portName);
                     return true;
                 } else {
-                    verbosePrint("Cyton Auto-Connect Button: Failed to connect using " + openBCI_portName + ". Check hardware or try pressing 'Auto-Scan'.");
+                    verbosePrint("Mentalium Auto-Connect Button: Failed to connect using " + openBCI_portName + ". Check hardware or try pressing 'Auto-Scan'.");
                     return false;
                 }
             }
@@ -375,9 +375,9 @@ class RadioConfig {
             println("Radios_Config: " + board_message.toString());
             rcStringReceived = board_message.toString();
             if(rcStringReceived.equals("Failure: System is Down")) {
-                rcStringReceived = "Cyton dongle could not connect to the board. Perhaps they are on different channels? \n\nTry pressing Auto-Scan.";
+                rcStringReceived = "Mentalium dongle could not connect to the board. Perhaps they are on different channels? \n\nTry pressing Auto-Scan.";
             } else if (rcStringReceived.equals("Success: System is Up")) {
-                rcStringReceived = "Success: Cyton and Dongle are paired. \n\nReady to Start Session!";
+                rcStringReceived = "Success: Mentalium and Dongle are paired. \n\nReady to Start Session!";
             } else if (!overridePressed && autoscanPressed && rcStringReceived.startsWith("Success: Host override")) {
                 rcStringReceived = "Please press Auto-Scan one more time.";
             }
@@ -395,9 +395,9 @@ class RadioConfig {
             verbosePrint("Radios_Config: " + board_message.toString());
             rcStringReceived = board_message.toString();
             if(rcStringReceived.equals("Failure: System is Down")) {
-                rcStringReceived = "Cyton dongle could not connect to the board. Perhaps they are on different channels? Try pressing Auto-Scan.";
+                rcStringReceived = "Mentalium dongle could not connect to the board. Perhaps they are on different channels? Try pressing Auto-Scan.";
             } else if (rcStringReceived.equals("Success: System is Up")) {
-                rcStringReceived = "Success: Cyton and Dongle are paired. \n\nReady to Start Session!";
+                rcStringReceived = "Success: Mentalium and Dongle are paired. \n\nReady to Start Session!";
             } else if (rcStringReceived.startsWith("Success: Host override")) {
                 rcStringReceived = "Please press Auto-Scan one more time.";
             }

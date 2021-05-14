@@ -31,8 +31,15 @@ adding the CP2102 option for the COM list.
 line 586 ControlPanel.pde    
 ```` java
  private LinkedList<String> getCytonComPorts() {
-    final String[] names = {"FT231X USB UART", "VCP", "CP2102"};
+    final String[] names = {"FT231X USB UART", "VCP", "CP210"};
 ````
+and to avoid name of Cyton, changed lines : 
+```
+//println("ControlPanel: Found Cyton Dongle on COM port: " + found);
+ println("ControlPanel: Found Dongle "+comPort.toString()+" on COM port: " + found);
+```
+*ControlPanel: Found Dongle FT231X USB UART on COM port: COM3*
+
 ## change logo 
 Add *logo-mentalium_nobackground-1000.png* in data folder    
 Dans openBCI_GUI.PDE around line 427 change source image    
@@ -139,7 +146,9 @@ Name of raw files
 
 
 ## notes 
-Risk with brainflow.jar :  A new version of OpenBCI Github can come with new brainflow.jar (or others).
-The libray folder in the source code  D:\Pep-inno2020\git_project\OpenBCI_GUI\OpenBCI_GUI\libraries   
-is used when running in development mode  (VSC)  
-But librairies used in compiling with Processing are rather in  C:\Users\pirla\Documents\Processing\libraries 
+Risk with brainflow.jar :  A new version of OpenBCI Github can come with new brainflow.jar (or others).   
+The libray folder in the source code * D:\Pep-inno2020\git_project\OpenBCI_GUI\OpenBCI_GUI\libraries  *    
+MUST BE COPIED INTO librairies used in compiling with Processing at :       *C:\Users\pirla\Documents\Processing\libraries *     
+In executable these lib lands into : *D:\Pep-inno2020\git_project\OpenBCI_GUI\OpenBCI_GUI\applicationwindows64\lib*  
+It can be checked using 7Zip to open the jar: can see brainflow.jar has a date of 2021-03-08    
+

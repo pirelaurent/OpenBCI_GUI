@@ -68,7 +68,7 @@ import http.requests.*;
 String appName = "Mentalium"; // to replace text appName+""
 String localGUIVersionString = "v5.0.4";
 //String localGUIVersionDate = "March 2021";
-String localGUIVersionDate = "-00-pla";
+String localGUIVersionDate = "-02-pla";
 String guiLatestVersionGithubAPI = "https://api.github.com/repos/OpenBCI/OpenBCI_GUI/releases/latest";
 String guiLatestReleaseLocation = "https://github.com/OpenBCI/OpenBCI_GUI/releases/latest";
 
@@ -884,7 +884,7 @@ void systemDraw() { //for drawing to the screen
     if (midInit) {
         drawOverlay("Starting Session...");
     } else if (controlPanel.comPortBox.isAutoScanningForCytonSerial()) {
-        drawOverlay("Auto-Scanning for Cyton...");
+        drawOverlay("Auto-Scanning for Mentalium...");
     }
 
     //Display GUI version and FPS in the title bar of the app
